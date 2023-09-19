@@ -32,16 +32,16 @@ namespace tomkyle\Cookies;
  * For instantiation, just pass in its name and,
  * optionally, a PHP filter constant.
  *
- * By default, `FILTER_SANITIZE_STRING` will be used.
+ * By default, `FILTER_UNSAFE_RAW` will be used.
  */
 class RequestCookie extends CookieAbstract implements CookieInterface
 {
 
     /**
      * @param string $name   Request cookie name
-     * @param int    $filter PHP Filter constant, default: `FILTER_SANITIZE_STRING`
+     * @param int    $filter PHP Filter constant, default: `FILTER_UNSAFE_RAW`
      */
-    public function __construct( $name, $filter = \FILTER_SANITIZE_STRING, &$input = array() )
+    public function __construct( $name, $filter = \FILTER_UNSAFE_RAW, &$input = array() )
     {
         $this->setName( $name );
 
@@ -58,7 +58,7 @@ class RequestCookie extends CookieAbstract implements CookieInterface
     }
 
 
-    protected function getFiltered( $input, $field, $filter = \FILTER_SANITIZE_STRING)
+    protected function getFiltered( $input, $field, $filter = \FILTER_UNSAFE_RAW)
     {
         return ( isset($input[ $field ]))
         ? filter_var( $input[ $field ], $filter )
